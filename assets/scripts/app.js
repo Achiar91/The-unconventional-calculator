@@ -21,37 +21,43 @@ function writeToLog(operator, prevResult, operationNumber, newResult) {
     console.log(logEntries);
 }
 
-function sum() {
+function calcResult(calculationType) {
     const enteredValue = getUserInputNumber();
     const initialResult = currentResult;
-    currentResult += enteredValue;
-    createDescription("+", initialResult, enteredValue);
-    writeToLog("sum", initialResult, enteredValue, currentResult);
+    let mathOperator;
+    if (calculationType === "sum") {
+        currentResult += enteredValue;
+        mathOperator = "+";
+    } else if (calculationType === "subtract") {
+        mathOperator = "-";
+        currentResult -= enteredValue;
+    } else if (calculationType === "multiply") {
+        mathOperator = "*";
+        currentResult *= enteredValue;
+    } else if (calculationType === "divide") {
+        mathOperator = "/";
+        currentResult /= enteredValue;
+    }
+
+    createDescription(mathOperator, initialResult, enteredValue);
+    writeToLog(calculationType, initialResult, enteredValue, currentResult);
 }
-function substract() {
-    const enteredValue = getUserInputNumber();
-    const initialResult = currentResult;
-    currentResult -= enteredValue;
-    createDescription("-", initialResult, enteredValue);
-    writeToLog("substract", initialResult, enteredValue, currentResult);
+
+function sum() {
+    calcResult("sum");
+}
+function subtract() {
+    calcResult("subtract");
 }
 
 function multiply() {
-    const enteredValue = getUserInputNumber();
-    const initialResult = currentResult;
-    currentResult *= enteredValue;
-    createDescription("*", initialResult, enteredValue);
-    writeToLog("multiply", initialResult, enteredValue, currentResult);
+    calcResult("multiply");
 }
 function divide() {
-    const enteredValue = getUserInputNumber();
-    const initialResult = currentResult;
-    currentResult /= enteredValue;
-    createDescription("/", initialResult, enteredValue);
-    writeToLog("divide", initialResult, enteredValue, currentResult);
+    calcResult("divide");
 }
 
 addBtn.addEventListener("click", sum);
-subtractBtn.addEventListener("click", substract);
+subtractBtn.addEventListener("click", subtract);
 multiplyBtn.addEventListener("click", multiply);
 divideBtn.addEventListener("click", divide);
