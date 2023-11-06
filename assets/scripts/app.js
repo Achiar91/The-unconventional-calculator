@@ -22,6 +22,14 @@ function writeToLog(operator, prevResult, operationNumber, newResult) {
 }
 
 function calcResult(calculationType) {
+    if (
+        calculationType !== "sum" &&
+        calculationType !== "subtract" &&
+        calculationType !== "multiply" &&
+        calculationType !== "divide"
+    ) {
+        return;
+    }
     const enteredValue = getUserInputNumber();
     const initialResult = currentResult;
     let mathOperator;
